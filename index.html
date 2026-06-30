@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AR Cosmiatría · Agustina Requelme · Ramos Mejía</title>
+<meta name="description" content="Dermatocosmiatra con 9 años de experiencia en Ramos Mejía. Tratamientos faciales personalizados con trato dedicado. Reservá por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', system-ui, sans-serif; background: #FAFAFA; color: #6F6C75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: #D8C9F2; color: #3a3640; }
+
+  @keyframes floatA { 0%,100% { transform: translate(0,0); } 50% { transform: translate(0,-26px); } }
+  @keyframes floatB { 0%,100% { transform: translate(0,0); } 50% { transform: translate(0,22px); } }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .4s ease, box-shadow .4s ease; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-mark { width: 42px; height: 42px; border-radius: 50%; border: 1.4px solid #8E74C9; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 19px; letter-spacing: 1px; color: #6F4FB0; flex-shrink: 0; }
+  .nav-logo-text { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 3.5px; color: #6F6C75; }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a { font-size: 14px; letter-spacing: .5px; color: #6F6C75; text-decoration: none; transition: color .3s ease; }
+  .nav-links a:hover { color: #6F4FB0; }
+  .btn-nav { display: inline-flex; align-items: center; gap: 8px; background: #8E74C9; color: #fff; font-family: 'Jost', sans-serif; font-size: 13.5px; letter-spacing: .5px; padding: 11px 20px; border-radius: 100px; text-decoration: none; box-shadow: 0 6px 18px rgba(142,116,201,.28); transition: transform .3s ease, box-shadow .3s ease; }
+  .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(142,116,201,.4); }
+
+  /* BUTTONS */
+  .btn-primary { display: inline-flex; align-items: center; gap: 9px; background: #8E74C9; color: #fff; font-family: 'Jost', sans-serif; font-size: 15px; letter-spacing: .4px; padding: 15px 28px; border-radius: 100px; text-decoration: none; box-shadow: 0 8px 22px rgba(142,116,201,.3); transition: transform .3s ease, box-shadow .3s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(142,116,201,.42); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; color: #46414F; font-family: 'Jost', sans-serif; font-size: 15px; letter-spacing: .4px; padding: 15px 22px; border-radius: 100px; border: 1px solid #E2D8F0; text-decoration: none; transition: background .3s ease; }
+  .btn-secondary:hover { background: #F3E7FF; }
+  .btn-white { display: inline-flex; align-items: center; gap: 9px; background: #fff; color: #6F4FB0; font-family: 'Jost', sans-serif; font-size: 14.5px; letter-spacing: .4px; padding: 13px 24px; border-radius: 100px; text-decoration: none; transition: transform .3s ease; }
+  .btn-white:hover { transform: translateY(-2px); }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 9px; background: #8E74C9; color: #fff; font-family: 'Jost', sans-serif; font-size: 15px; padding: 14px 26px; border-radius: 100px; text-decoration: none; box-shadow: 0 8px 22px rgba(142,116,201,.3); transition: transform .3s ease; }
+  .btn-whatsapp:hover { transform: translateY(-2px); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 9px; color: #46414F; font-family: 'Jost', sans-serif; font-size: 15px; padding: 14px 24px; border-radius: 100px; border: 1px solid #E2D8F0; text-decoration: none; transition: background .3s ease; }
+  .btn-outline:hover { background: #F3E7FF; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #6F4FB0; font-family: 'Jost', sans-serif; font-size: 16px; letter-spacing: .4px; padding: 17px 34px; border-radius: 100px; text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; box-shadow: 0 14px 34px -10px rgba(0,0,0,.3); }
+  .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 20px 44px -10px rgba(0,0,0,.4); }
+
+  /* REVEAL */
+  [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].visible { opacity: 1; transform: none; }
+
+  /* SERVICE CARDS */
+  .service-card { background: #fff; border: 1px solid #EFEAF6; border-radius: 18px; padding: 28px 26px; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease; }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 44px -26px rgba(111,79,176,.4); border-color: #E0D4F2; }
+
+  /* FAQ */
+  .faq-item { background: #fff; border: 1px solid #EFEAF6; border-radius: 16px; overflow: hidden; transition: border-color .3s ease; }
+  .faq-item:hover { border-color: #E0D4F2; }
+  .faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: none; border: none; padding: 22px 26px; cursor: pointer; text-align: left; font-family: 'Jost', sans-serif; }
+  .faq-answer { display: none; padding: 0 26px 24px; }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-sign { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #F3E7FF; color: #8E74C9; display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1; }
+
+  /* PLACEHOLDER (reemplazar con imágenes reales) */
+  .img-placeholder { background: repeating-linear-gradient(135deg,#F3E7FF,#F3E7FF 13px,#EADFF8 13px,#EADFF8 26px); display: flex; align-items: center; justify-content: center; }
+  .img-placeholder span { font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: 1px; color: #A99CC0; background: rgba(255,255,255,.65); padding: 6px 12px; border-radius: 6px; }
+
+  /* LAYOUT */
+  .sec-pad { padding-left: 40px; padding-right: 40px; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; }
+
+  /* RESPONSIVE */
+  @media (max-width: 840px) {
+    .nav-links { display: none; }
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .hero-h1 { font-size: 50px !important; }
+    .split { grid-template-columns: 1fr !important; }
+    .sec-pad { padding-left: 24px !important; padding-right: 24px !important; }
+    .nav-inner { padding: 18px 24px; }
+  }
+  @media (max-width: 560px) {
+    .hero-h1 { font-size: 40px !important; }
+    .display-xl { font-size: 34px !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <span class="nav-logo-mark">AR</span>
+      <span class="nav-logo-text">COSMIATRÍA</span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#sobre">Sobre mí</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="https://wa.me/5491131004125?text=Hola%20Agustina!%20Quiero%20reservar%20un%20turno%20%E2%9C%A8" target="_blank" class="btn-nav">Reservar turno</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" style="position:relative;padding:150px 40px 90px">
+  <div aria-hidden="true" style="position:absolute;top:-120px;right:-100px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#F3E7FF,#E4D6F7 60%,#FAFAFA);filter:blur(8px);z-index:0;animation:floatA 11s ease-in-out infinite;pointer-events:none"></div>
+  <div aria-hidden="true" style="position:absolute;bottom:-60px;left:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#F3E7FF,#FAFAFA 70%);z-index:0;animation:floatB 9s ease-in-out infinite;pointer-events:none"></div>
+
+  <div class="hero-grid sec-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding:0">
+
+    <div data-reveal>
+      <div style="display:inline-flex;align-items:center;gap:10px;background:#F3E7FF;padding:7px 16px;border-radius:100px;margin-bottom:26px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#8E74C9;flex-shrink:0"></span>
+        <span style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#6F4FB0">Dermatocosmiatra · Ramos Mejía</span>
+      </div>
+      <h1 class="hero-h1" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:66px;line-height:1.02;letter-spacing:-.5px;color:#46414F;margin:0 0 22px">
+        Tu piel, cuidada<br>como se <em style="font-style:italic;font-weight:500;color:#8E74C9">merece</em>.
+      </h1>
+      <p style="font-size:18px;line-height:1.65;font-weight:300;color:#6F6C75;max-width:440px;margin:0 0 34px">
+        Cosmiatría con trato personalizado. Adapto cada protocolo a lo que tu piel realmente necesita — con la dedicación y la confianza que mis pacientes destacan.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <a href="https://wa.me/5491131004125?text=Hola%20Agustina!%20Quiero%20reservar%20un%20turno%20%E2%9C%A8" target="_blank" class="btn-primary">Reservar por WhatsApp</a>
+        <a href="#servicios" class="btn-secondary">Ver tratamientos →</a>
+      </div>
+      <div style="display:flex;gap:34px;margin-top:40px">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:#46414F;line-height:1">9</div>
+          <div style="font-size:12.5px;letter-spacing:1px;color:#9B98A2;text-transform:uppercase;margin-top:4px">Años de<br>experiencia</div>
+        </div>
+        <div style="width:1px;background:#E8E2F0"></div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:#46414F;line-height:1">+10</div>
+          <div style="font-size:12.5px;letter-spacing:1px;color:#9B98A2;text-transform:uppercase;margin-top:4px">Tratamientos<br>faciales</div>
+        </div>
+        <div style="width:1px;background:#E8E2F0"></div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:#46414F;line-height:1">★★★★★</div>
+          <div style="font-size:12.5px;letter-spacing:1px;color:#9B98A2;text-transform:uppercase;margin-top:4px">Reseñas en<br>Google</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal style="transition-delay:.12s;position:relative">
+      <div aria-hidden="true" style="position:absolute;width:340px;height:340px;border:1.4px solid #D8C9F2;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:spinSlow 60s linear infinite;z-index:0;pointer-events:none"></div>
+      <!-- REEMPLAZAR: <img src="foto-agustina.jpg" alt="Agustina Requelme" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="img-placeholder" style="position:relative;z-index:1;aspect-ratio:4/5;border-radius:230px 230px 22px 22px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(111,79,176,.45)">
+        <span>foto profesional</span>
+      </div>
+      <div style="position:absolute;z-index:2;bottom:26px;left:-22px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 16px 40px -16px rgba(111,79,176,.4);display:flex;align-items:center;gap:12px">
+        <span style="width:40px;height:40px;border-radius:50%;border:1.4px solid #8E74C9;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;color:#6F4FB0;flex-shrink:0">AR</span>
+        <div>
+          <div style="font-size:13px;color:#46414F;font-weight:500">Agustina Requelme</div>
+          <div style="font-size:11.5px;color:#9B98A2;letter-spacing:.5px">Dermatocosmiatra</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- TRUST STRIP -->
+<div class="sec-pad" style="max-width:1200px;margin:0 auto;padding-top:0;padding-bottom:0">
+  <div data-reveal style="display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:center;padding:26px 30px;background:#F3E7FF;border-radius:18px">
+    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:#6F4FB0"><span style="width:5px;height:5px;border-radius:50%;background:#8E74C9;flex-shrink:0"></span>Trato personalizado</span>
+    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:#6F4FB0"><span style="width:5px;height:5px;border-radius:50%;background:#8E74C9;flex-shrink:0"></span>Protocolos a medida</span>
+    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:#6F4FB0"><span style="width:5px;height:5px;border-radius:50%;background:#8E74C9;flex-shrink:0"></span>Consultorio en Ramos Mejía</span>
+    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:#6F4FB0"><span style="width:5px;height:5px;border-radius:50%;background:#8E74C9;flex-shrink:0"></span>Turnos por WhatsApp</span>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="sec-pad" style="max-width:1200px;margin:0 auto;padding-top:110px;padding-bottom:20px">
+  <div data-reveal style="text-align:center;max-width:620px;margin:0 auto 56px">
+    <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8E74C9;margin-bottom:16px">Tratamientos</div>
+    <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:46px;line-height:1.08;color:#46414F;margin:0 0 16px">Cada tratamiento, pensado para tu piel</h2>
+    <p style="font-size:16px;font-weight:300;line-height:1.6;color:#8B8893;margin:0">Sesiones de aproximadamente 1h15 según el servicio. Los precios se consultan por WhatsApp.</p>
+  </div>
+
+  <!-- DESTACADO -->
+  <div data-reveal class="split" style="border-radius:24px;overflow:hidden;margin-bottom:36px;box-shadow:0 24px 60px -34px rgba(111,79,176,.45);grid-template-columns:1.15fr .85fr">
+    <div style="background:linear-gradient(150deg,#8E74C9,#6F4FB0);padding:52px 48px;color:#fff;display:flex;flex-direction:column;justify-content:center">
+      <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:rgba(255,255,255,.16);padding:6px 14px;border-radius:100px;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px">★ El más pedido</span>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;line-height:1.1;margin:0 0 16px">Higiene facial con extracciones reales</h3>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.9);margin:0 0 28px;max-width:420px">
+        Limpieza profunda con extracciones de verdad — eso que en otros lados no te hacen. Dejo la piel descongestionada, luminosa y respirando, con el cuidado que cada rostro necesita.
+      </p>
+      <a href="https://wa.me/5491131004125?text=Hola%20Agustina!%20Quiero%20reservar%20una%20higiene%20facial%20con%20extracciones" target="_blank" class="btn-white">Reservar este tratamiento →</a>
+    </div>
+    <!-- REEMPLAZAR: imagen antes/después -->
+    <div class="img-placeholder" style="min-height:300px">
+      <span>antes / después</span>
+    </div>
+  </div>
+
+  <!-- GRILLA DE SERVICIOS -->
+  <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:18px">
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">01</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Limpieza facial</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Higiene profunda que descongestiona y devuelve luminosidad al rostro.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">02</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Peeling químico</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Renovación celular para una piel más pareja, suave y revitalizada.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">03</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Yellow Peel</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Peeling intensivo que unifica el tono y trata manchas y signos de edad.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">04</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Hidratación profunda</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Recupera la barrera y deja la piel nutrida, flexible y con vida.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">05</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Dermaplaning</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Exfoliación con bisturí que suaviza la textura y aporta luz inmediata.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">06</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Dermapen</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Microinducción de colágeno para firmeza, cicatrices y poros.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">07</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Radiofrecuencia</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Tensa y reafirma estimulando el colágeno desde lo profundo.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">08</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Tratamiento Premium</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Protocolo completo y a medida para resultados visibles y duraderos.</p>
+    </div>
+    <div class="service-card">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#8E74C9">09</span></div>
+      <h3 style="font-family:'Jost',sans-serif;font-weight:500;font-size:17.5px;color:#46414F;margin:0 0 8px;letter-spacing:.2px">Limpieza de espalda</h3>
+      <p style="font-size:14px;font-weight:300;line-height:1.55;color:#9B98A2;margin:0">Higiene profunda corporal para una piel limpia y descongestionada.</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:14px;color:#B8B5BD;margin:30px 0 0">
+    ¿No sabés cuál elegir? <a href="https://wa.me/5491131004125?text=Hola!%20Quiero%20asesoramiento%20sobre%20un%20tratamiento" target="_blank" style="color:#8E74C9;text-decoration:none;border-bottom:1px solid #D8C9F2">Te asesoro por WhatsApp</a>
+  </p>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre" class="sec-pad" style="padding-top:110px;padding-bottom:110px">
+  <div class="split" style="max-width:1100px;margin:0 auto;grid-template-columns:.85fr 1.15fr;gap:62px;align-items:center">
+    <div data-reveal style="position:relative">
+      <!-- REEMPLAZAR: <img src="retrato-agustina.jpg" alt="Agustina Requelme" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="img-placeholder" style="aspect-ratio:4/5;border-radius:22px 22px 200px 200px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(111,79,176,.4)">
+        <span>retrato de Agustina</span>
+      </div>
+    </div>
+    <div data-reveal style="transition-delay:.1s">
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8E74C9;margin-bottom:16px">Sobre mí</div>
+      <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;line-height:1.1;color:#46414F;margin:0 0 22px">
+        Soy Agustina,<br>y tu piel está en buenas manos
+      </h2>
+      <p style="font-size:16.5px;font-weight:300;line-height:1.75;color:#6F6C75;margin:0 0 18px">
+        Hace <strong style="font-weight:500;color:#46414F">9 años</strong> que trabajo como cosmetóloga y dermatocosmiatra. En este tiempo aprendí que no hay dos pieles iguales — por eso adapto cada protocolo priorizando lo que cada paciente realmente necesita.
+      </p>
+      <p style="font-size:16.5px;font-weight:300;line-height:1.75;color:#6F6C75;margin:0 0 30px">
+        Lo que más me marcan mis clientas es la dedicación en el tiempo y la confianza. No hay sesiones apuradas: cada turno es tuyo.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <span style="font-size:13.5px;color:#6F4FB0;background:#F3E7FF;padding:9px 16px;border-radius:100px">Dermatocosmiatra certificada</span>
+        <span style="font-size:13.5px;color:#6F4FB0;background:#F3E7FF;padding:9px 16px;border-radius:100px">Protocolos personalizados</span>
+        <span style="font-size:13.5px;color:#6F4FB0;background:#F3E7FF;padding:9px 16px;border-radius:100px">Consultorio en Ramos Mejía</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios" style="background:#F3E7FF;padding:104px 0">
+  <div class="sec-pad" style="max-width:1200px;margin:0 auto">
+    <div data-reveal style="text-align:center;max-width:560px;margin:0 auto 54px">
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8E74C9;margin-bottom:16px">Lo que dicen mis pacientes</div>
+      <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;line-height:1.1;color:#46414F;margin:0">Reseñas reales, de Google</h2>
+    </div>
+    <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px">
+      <div style="background:#fff;border-radius:20px;padding:32px 30px;box-shadow:0 20px 50px -34px rgba(111,79,176,.4);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="color:#8E74C9;font-size:16px;letter-spacing:3px">★★★★★</span>
+          <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B8B5BD">vía Google</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;line-height:1.45;color:#56505F;margin:0">"La diferencia se nota: es la primera vez que me hacen extracciones de verdad. Salí con la piel impecable."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto">
+          <span style="width:38px;height:38px;border-radius:50%;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:#8E74C9;flex-shrink:0">C</span>
+          <span style="font-size:14px;color:#6F6C75;font-weight:500">Camila G.</span>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:32px 30px;box-shadow:0 20px 50px -34px rgba(111,79,176,.4);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="color:#8E74C9;font-size:16px;letter-spacing:3px">★★★★★</span>
+          <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B8B5BD">vía Google</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;line-height:1.45;color:#56505F;margin:0">"Agustina se toma su tiempo, explica cada paso y se nota que adapta todo a tu piel. Confianza total."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto">
+          <span style="width:38px;height:38px;border-radius:50%;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:#8E74C9;flex-shrink:0">F</span>
+          <span style="font-size:14px;color:#6F6C75;font-weight:500">Florencia M.</span>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:32px 30px;box-shadow:0 20px 50px -34px rgba(111,79,176,.4);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="color:#8E74C9;font-size:16px;letter-spacing:3px">★★★★★</span>
+          <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B8B5BD">vía Google</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;line-height:1.45;color:#56505F;margin:0">"Voy hace meses y mi piel cambió por completo. Trato cálido y un consultorio precioso."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto">
+          <span style="width:38px;height:38px;border-radius:50%;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:#8E74C9;flex-shrink:0">D</span>
+          <span style="font-size:14px;color:#6F6C75;font-weight:500">Daniela P.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="sec-pad" style="max-width:1100px;margin:0 auto;padding-top:108px;padding-bottom:108px">
+  <div class="split" data-reveal style="gap:48px;align-items:stretch">
+    <div>
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8E74C9;margin-bottom:16px">Horarios y ubicación</div>
+      <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:42px;line-height:1.1;color:#46414F;margin:0 0 28px">Te espero en el consultorio</h2>
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;gap:16px">
+          <span style="width:42px;height:42px;flex-shrink:0;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-size:18px">🕑</span>
+          <div>
+            <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B5BD;margin-bottom:5px">Atención</div>
+            <div style="font-size:16.5px;color:#46414F">Lunes a sábado · 10:00 a 18:00</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px">
+          <span style="width:42px;height:42px;flex-shrink:0;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-size:18px">📍</span>
+          <div>
+            <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B5BD;margin-bottom:5px">Consultorio</div>
+            <div style="font-size:16.5px;color:#46414F">Ramos Mejía, Buenos Aires</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px">
+          <span style="width:42px;height:42px;flex-shrink:0;border-radius:12px;background:#F3E7FF;display:flex;align-items:center;justify-content:center;font-size:18px">💬</span>
+          <div>
+            <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B5BD;margin-bottom:5px">Reservas</div>
+            <div style="font-size:16.5px;color:#46414F">WhatsApp · 11 3100 4125</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:34px;flex-wrap:wrap">
+        <a href="https://wa.me/5491131004125?text=Hola%20Agustina!%20Quiero%20reservar%20un%20turno%20%E2%9C%A8" target="_blank" class="btn-whatsapp">Escribir por WhatsApp</a>
+        <a href="https://instagram.com/ar.cosmiatria" target="_blank" class="btn-outline">@ar.cosmiatria</a>
+      </div>
+    </div>
+    <!-- REEMPLAZAR: embed de Google Maps con la dirección del consultorio -->
+    <div class="img-placeholder" style="border-radius:22px;overflow:hidden;min-height:340px">
+      <span>mapa · Ramos Mejía</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec-pad" style="max-width:780px;margin:0 auto;padding-top:20px;padding-bottom:110px">
+  <div data-reveal style="text-align:center;margin-bottom:46px">
+    <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8E74C9;margin-bottom:16px">Preguntas frecuentes</div>
+    <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:42px;line-height:1.1;color:#46414F;margin:0">Antes de tu turno</h2>
+  </div>
+  <div data-reveal style="display:flex;flex-direction:column;gap:12px">
+    <div class="faq-item open">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span style="font-size:16.5px;color:#46414F;font-weight:500">¿Publican los precios en la web?</span>
+        <span class="faq-sign">–</span>
+      </button>
+      <div class="faq-answer">
+        <p style="font-size:15px;font-weight:300;line-height:1.65;color:#8B8893;margin:0;max-width:600px">Los precios se consultan por WhatsApp, ya que varían según el tratamiento y lo que tu piel necesite. Te paso todo sin compromiso.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span style="font-size:16.5px;color:#46414F;font-weight:500">¿Cuánto dura una sesión?</span>
+        <span class="faq-sign">+</span>
+      </button>
+      <div class="faq-answer">
+        <p style="font-size:15px;font-weight:300;line-height:1.65;color:#8B8893;margin:0;max-width:600px">Aproximadamente 1 hora y cuarto, aunque varía según el servicio. Nunca son turnos apurados: cada sesión es tuya.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span style="font-size:16.5px;color:#46414F;font-weight:500">¿Atendés a domicilio?</span>
+        <span class="faq-sign">+</span>
+      </button>
+      <div class="faq-answer">
+        <p style="font-size:15px;font-weight:300;line-height:1.65;color:#8B8893;margin:0;max-width:600px">Atiendo únicamente en consultorio, en Ramos Mejía, para garantizar las mejores condiciones de higiene y equipamiento.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span style="font-size:16.5px;color:#46414F;font-weight:500">¿Hacen extracciones reales?</span>
+        <span class="faq-sign">+</span>
+      </button>
+      <div class="faq-answer">
+        <p style="font-size:15px;font-weight:300;line-height:1.65;color:#8B8893;margin:0;max-width:600px">Sí. La higiene facial incluye extracciones de verdad — es justamente lo que mis pacientes destacan que en otros lados no les hacen.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span style="font-size:16.5px;color:#46414F;font-weight:500">¿Cómo reservo un turno?</span>
+        <span class="faq-sign">+</span>
+      </button>
+      <div class="faq-answer">
+        <p style="font-size:15px;font-weight:300;line-height:1.65;color:#8B8893;margin:0;max-width:600px">Por WhatsApp al 11 3100 4125. Escribime, contame qué necesitás y coordinamos día y horario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="sec-pad" style="max-width:1200px;margin:0 auto;padding-top:0;padding-bottom:100px">
+  <div data-reveal style="position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#8E74C9,#6F4FB0);padding:80px 48px;text-align:center">
+    <div aria-hidden="true" style="position:absolute;top:-80px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.1);animation:floatA 10s ease-in-out infinite;pointer-events:none"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-90px;left:-40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08);animation:floatB 12s ease-in-out infinite;pointer-events:none"></div>
+    <div style="position:relative;z-index:1">
+      <span style="width:58px;height:58px;border-radius:50%;border:1.4px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:#fff;margin-bottom:24px">AR</span>
+      <h2 class="display-xl" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:48px;line-height:1.08;color:#fff;margin:0 0 16px">Reservá tu turno hoy</h2>
+      <p style="font-size:17px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.88);max-width:440px;margin:0 auto 32px">
+        Contame qué necesita tu piel y armamos juntas el tratamiento ideal.
+      </p>
+      <a href="https://wa.me/5491131004125?text=Hola%20Agustina!%20Quiero%20reservar%20un%20turno%20%E2%9C%A8" target="_blank" class="btn-cta">Reservar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sec-pad" style="border-top:1px solid #EFEAF6;padding-top:46px;padding-bottom:46px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:13px">
+      <span style="width:42px;height:42px;border-radius:50%;border:1.4px solid #8E74C9;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#6F4FB0;flex-shrink:0">AR</span>
+      <div>
+        <div style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:3px;color:#6F6C75">COSMIATRÍA</div>
+        <div style="font-size:12px;color:#B8B5BD;margin-top:2px">Agustina Requelme · Dermatocosmiatra</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:22px;font-size:13.5px;color:#9B98A2">
+      <a href="https://instagram.com/ar.cosmiatria" target="_blank" style="color:#9B98A2;text-decoration:none;transition:color .3s ease" onmouseover="this.style.color='#6F4FB0'" onmouseout="this.style.color='#9B98A2'">@ar.cosmiatria</a>
+      <a href="https://wa.me/5491131004125" target="_blank" style="color:#9B98A2;text-decoration:none;transition:color .3s ease" onmouseover="this.style.color='#6F4FB0'" onmouseout="this.style.color='#9B98A2'">WhatsApp 11 3100 4125</a>
+      <span>Ramos Mejía · Lun a Sáb 10–18</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav: efecto glass al hacer scroll
+  const nav = document.getElementById('main-nav');
+  function onScroll() {
+    const scrolled = window.scrollY > 24;
+    nav.style.background = scrolled ? 'rgba(250,250,250,0.82)' : 'transparent';
+    nav.style.boxShadow = scrolled ? '0 1px 0 rgba(111,108,117,0.10)' : 'none';
+    nav.style.backdropFilter = scrolled ? 'saturate(180%) blur(14px)' : 'none';
+    nav.style.webkitBackdropFilter = scrolled ? 'saturate(180%) blur(14px)' : 'none';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Animaciones de entrada al hacer scroll
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.style.transitionDelay || '0s';
+          e.target.style.transitionDelay = delay;
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const sign = btn.querySelector('.faq-sign');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-sign').textContent = '+';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      sign.textContent = '–';
+    }
+  }
+</script>
+
+</body>
+</html>
